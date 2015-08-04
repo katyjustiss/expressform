@@ -4,13 +4,14 @@ var bodyParser = require('body-parser');
 //setting express to app
 var app = express();
 
+var route = require('./routes/main');
+var about = require('./routes/about');
+var contact = require('./routes/contact');
+
 //ejs
 app.set('view engine', 'ejs');
-
+app.locals.title = 'KatyJustiss';
 //required routes
-var route = require('./routes/index')
-var about = require('./routes/about');
-var contact = require('./routes/contact')
 
 
 
