@@ -13,15 +13,27 @@ app.set('view engine', 'ejs');
 app.locals.title = 'KatyJustiss';
 //required routes
 
-
+require('./lib/secrets');
 
 //parsing form data
-//app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({extended:false}))
 
 //using required routes
 app.use('/', route);
 app.use('/about', about);
 app.use('/contact', contact);
+
+
+//errors
+app.use(function (req, res, next) {
+  res.status(403);
+  res.send('Unauthorized');
+});
+
+app.use(function (err, req, res, next) {
+  console.log('ERRRRRRR', err.stack);
+  res.status(500).send('My fault');
+});
 
 
 var server = app.listen(3000, function () {

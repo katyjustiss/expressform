@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require("nodemailer");
+var email = require('../lib/nodemailer');
 
 router.get('/', function(req, res) {
     res.render('templates/contact');
@@ -8,16 +9,9 @@ router.get('/', function(req, res) {
 
 router.post('/greeting', function(req, res) {
   console.log(req.body);
+  email(req.body)
   res.redirect('/');
-  // res.send('Thanks for contacting')
-});
 
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'katy.justiss@gmail.com',
-        pass: 'userpass'
-    }
-});
+});//end post
 
 module.exports = router;
